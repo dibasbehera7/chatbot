@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="chatbox">
+
+<head>
+<title>ChatBot | Beta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/angular.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/chatbot-style.css" />
+    <script type="text/javascript" src="js/chatbot-script.js"></script>
+</head>
+
+<body ng-controller="StoreController as store">
+    <div class="flexbox-parent">
+        <header class="flexbox-item header header-page">
+            <h1>Welcome Back! ChatBot</h1>
+        </header>
+
+        <div class="flexbox-item fill-area-content">
+            <div class="fill-area-content">
+                <div class="row">
+                    <div class="container">
+                        <div class="panel panel-default" ng-repeat="product in store.products">
+                            <div class="panel-heading">chatbot, want to talk with you... please write some message.</div>
+                            <div class="panel-body">
+                                <!--  Main Container  -->
+                                <div class="list-group">
+                                    <!--  Main Container Items -->
+                                    <div class="list-group-item">
+                                        <!--  Preview Tab's Content  -->
+                                        <div>
+                                            <!--  Past Messages List -->
+                                            <ul class="container-fluid">
+                                                <h4><strong>Past Messages</strong></h4>
+                                                <li class="card" ng-repeat="review in product.messages">
+                                                    <blockquote>
+                                                        {{review.body}}
+                                                        <!--<cite class="clearfix pull-right">{{review.createdOn|date:'@h:mma'}}</cite>-->
+                                                    </blockquote>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="panel-footer">
+                                <!--  Preview Form -->
+                                <form name="reviewForm" ng-controller="PreviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+
+                                    <!--  Live Preview -->
+                                    <blockquote class="card" ng-hide="!reviewCtrl.review.body">
+                                        {{reviewCtrl.review.body}}
+                                    </blockquote>
+
+                                    <!--  Preview Form -->
+                                    <h4><strong>Write your Messages</strong></h4>
+                                    <fieldset class="form-group">
+                                        <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="write some text here..." title="Review" required></textarea>
+                                    </fieldset>
+                                    <fieldset class="form-group">
+                                        <input type="submit" class="btn btn-success pull-right" value="Send Reply" />
+                                    </fieldset>
+                                </form>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="flexbox-item footer footer-page">
+            <small>Copyright &copy; 2018&nbsp;&nbsp;&nbsp;Developed by Dibas Behera</small>
+        </footer>
+    </div>
+</body>
+
+</html>
